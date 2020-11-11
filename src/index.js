@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import config from './config';
+import config2 from './aws-exports';
 import { Amplify } from 'aws-amplify';
-//import { ReactComponent } from '*.svg';
+
+Amplify.configure(config2);
 
 Amplify.configure({
   Storage: {
@@ -22,22 +24,6 @@ Amplify.configure({
     ]
   }
 });
-
-// function submitHandler(event) {
-//   alert("Text submitted");
-//   const api = 'https://lpztlq09de.execute-api.us-east-1.amazonaws.com/test'
-// }
-
-// class SentimentInput extends React.Component{
-//   render() {
-//     return (
-//       <form onSubmit={submitHandler}>
-//         <h1>Input text to analyze</h1>
-//         <input type="text"/>
-//       </form>
-//     );
-//   }
-// }
 
 ReactDOM.render(
   <React.StrictMode>

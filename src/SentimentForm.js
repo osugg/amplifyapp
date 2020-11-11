@@ -22,23 +22,6 @@ class SentimentForm extends React.Component{
         }
         
         fetch(api, {method: 'POST', cors: 'allow-cors', body: JSON.stringify(data)})
-
-        // axios
-        //     .post(api, data, {
-        //         headers: {
-        //             'Access-Control-Allow-Origin': '*'
-        //         }})
-        //     .then((response) => {
-        //         this.setState({
-        //             result: response
-        //         })
-        //         console.log("got answer")
-        //         console.log(response);
-        //     })
-        //     .catch((error) => {
-        //         console.log("error getting request")
-        //         console.log(error);
-        //     });
     }
 
     onInputChange = (event) => {
