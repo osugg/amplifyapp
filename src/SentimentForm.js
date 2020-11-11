@@ -14,36 +14,37 @@ class SentimentForm extends React.Component{
 
     submitHandler = (event) => {
         event.preventDefault();
-        alert(event.target.value);
-        console.log(event);
-        console.log(event.target.name);
-        console.log(event.target.value);
-        this.setState({
-            inputText: event.target.value
-        })
+        alert(this.state.inputText);
         
-        console.log("state set to " + this.inputText)
-        const api = 'https://lpztlq09de.execute-api.us-east-1.amazonaws.com/comprehend'
+        const api = 'https://lpztlq09de.execute-api.us-east-1.amazonaws.com/comprehend/comprehend'
         const data = {
-            "inputTranscript": 'good'
+            "inputTranscript": this.state.inputText
         }
         
-        axios
-            .post(api, data, {
-                headers: {
-                    'Access-Control-Allow-Origin': '*'
-                }})
-            .then((response) => {
-                this.setState({
-                    result: response
-                })
-                console.log("got answer")
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log("error getting request")
-                console.log(error);
-            });
+        fetch(api, {method: 'POST', cors: 'allow-cors', body: JSON.stringify(data)})
+
+        // axios
+        //     .post(api, data, {
+        //         headers: {
+        //             'Access-Control-Allow-Origin': '*'
+        //         }})
+        //     .then((response) => {
+        //         this.setState({
+        //             result: response
+        //         })
+        //         console.log("got answer")
+        //         console.log(response);
+        //     })
+        //     .catch((error) => {
+        //         console.log("error getting request")
+        //         console.log(error);
+        //     });
+    }
+
+    onInputChange = (event) => {
+        this.setState({
+            inputText: event.target.value
+        })        
     }
 
     render() {
@@ -52,7 +53,7 @@ class SentimentForm extends React.Component{
                 <header className="App-header">
                     <form onSubmit={this.submitHandler}>
                         <h1>Input text to analyze</h1>
-                        <input type='text' name='sentimentInput'/>
+                        <input type='text' name='sentimentInput' value={this.state.inputText} onChange={this.onInputChange}/>
                     </form>
                 </header>
             </div>
